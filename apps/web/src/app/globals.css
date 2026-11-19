@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/*
+ * OS Lab design tokens — Claude palette, light + dark.
+ * Utilities (bg-canvas, text-ink, …) point at CSS variables, which switch with
+ * <html data-theme="light|dark">, set by lib/theme.tsx (Light, Dark, or System = follow the OS).
+ * Palette: ivory #faf9f5, charcoal #141413, Claude orange #d97757, sand #e8e6dc,
+ * blue #6a9bcc, olive #788c5d.
+ */
+@theme {
+  --font-sans: var(--font-source), "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-source-code), "Source Code Pro", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+
+  --color-lab: var(--lab);
+  --color-lab-panel: var(--lab-panel);
+  --color-lab-raised: var(--lab-raised);
+  --color-lab-line: var(--lab-line);
+  --color-lab-text: var(--lab-text);
+  --color-lab-dim: var(--lab-dim);
+  --color-signal: var(--signal);
+  --color-warn: var(--warn);
+  --color-fault: var(--fault);
+
+  /* Hover-reveal timing for gallery cards: 180ms, easeOut (0.16, 1, 0.3, 1). */
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-pulse-ring: pulse-ring 1.6s ease-out infinite;
+  --animate-slide-in: slide-in 0.35s ease-out;
+
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 50%, transparent); }
+    100% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--signal) 0%, transparent); }
+  }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+
+/* ── Theme values ─────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+  --canvas: #faf9f5;
+  --surface: #ffffff;
+  --raised: #f0eee6;
+  --ink: #141413;
+  --muted: #5e5d59;
+  --faint: #87867f;
+  --line: #e8e6dc;
+  --brand: #d97757;
+  --brand-ink: #c15f3c;
+  --brand-soft: #d977571f;
+  --ok: #4f7a3a;
+  --ok-soft: #788c5d24;
+  --bad: #b5483b;
+  --bad-soft: #b5483b1a;
+  --amber: #9a6a14;
+  --amber-soft: #c4a35a29;
+
+  --lab: #f3f1ea;
+  --lab-panel: #fbfaf7;
+  --lab-raised: #ebe8de;
+  --lab-line: #dedbcf;
+  --lab-text: #141413;
+  --lab-dim: #6f6d66;
+  --signal: #4f7a3a;
+  --warn: #9a6a14;
+  --fault: #c0503f;
+
+  --plate-ink: #141413;
+  --plate-process: #e8e6dc;
+  --plate-cpu: #dfe7ee;
+  --plate-memory: #f0e4d4;
+  --plate-paging: #e3e8d9;
+  --plate-disk: #f2e0d8;
+  --plate-practice: #efe7d1;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --canvas: #1f1e1d;
+  --surface: #262624;
+  --raised: #30302e;
+  --ink: #faf9f5;
+  --muted: #b0aea5;
+  --faint: #85837c;
+  --line: #3a3936;
+  --brand: #d97757;
+  --brand-ink: #e48d6f;
+  --brand-soft: #d9775729;
+  --ok: #a3c27d;
+  --ok-soft: #788c5d33;
+  --bad: #ec8b7c;
+  --bad-soft: #ec8b7c24;
+  --amber: #e0b05c;
+  --amber-soft: #c4a35a2e;
+
+  --lab: #1a1918;
+  --lab-panel: #232220;
+  --lab-raised: #2d2c2a;
+  --lab-line: #3a3936;
+  --lab-text: #f0eee6;
+  --lab-dim: #a19f97;
+  --signal: #a3c27d;
+  --warn: #e0b05c;
+  --fault: #ec8b7c;
+
+  --plate-ink: #faf9f5;
+  --plate-process: #2b2a28;
+  --plate-cpu: #1f2a35;
+  --plate-memory: #33281d;
+  --plate-paging: #242b1f;
+  --plate-disk: #36241f;
+  --plate-practice: #312b1c;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  ::selection { background: var(--color-brand-soft); }
+  :focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+  input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+}
+
+@layer components {
+  /* The lab bench: a slightly cooler, darker surface than the page. */
+  .lab-grid { background-color: var(--color-lab); }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

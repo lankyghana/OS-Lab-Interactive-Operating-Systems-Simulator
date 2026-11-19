@@ -1,0 +1,7 @@
+import type { Metadata } from 'next';
+import { AuthPage } from '@/features/auth/auth-pages';
+
+export const metadata: Metadata = { title: 'Sign in' };
+export default function Page() {
+  return <AuthPage mode="sign-in" />;
+}
