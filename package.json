@@ -1,0 +1,40 @@
+{
+  "name": "os-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OS Lab \u2014 an interactive Operating Systems learning platform",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @os-lab/engine build && pnpm --parallel --filter @os-lab/web --filter @os-lab/api dev",
+    "dev:web": "pnpm --filter @os-lab/web dev",
+    "build": "pnpm --filter @os-lab/engine build && pnpm --filter @os-lab/api prisma:generate && pnpm -r --filter !@os-lab/engine build",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @os-lab/web test:e2e",
+    "typecheck": "pnpm -r typecheck",
+    "build:demo": "node tools/build-demo.mjs node_modules",
+    "db:up": "docker compose up -d db",
+    "db:migrate": "pnpm --filter @os-lab/api prisma:migrate"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "tailwindcss": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.0",
+    "class-variance-authority": "^0.7.1"
+  },
+  "author": "Daniel Kwadwo Takyi <danielkwadwotakyi@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lankyghana/OS-Lab-Interactive-Operating-Systems-Simulator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lankyghana/OS-Lab-Interactive-Operating-Systems-Simulator/issues"
+  },
+  "homepage": "https://github.com/lankyghana/OS-Lab-Interactive-Operating-Systems-Simulator#readme"
+}
