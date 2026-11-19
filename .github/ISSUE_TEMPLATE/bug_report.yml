@@ -1,0 +1,33 @@
+name: Bug report
+description: A wrong answer, broken control or confusing message
+labels: [bug]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where
+      options: [Process Management, CPU Scheduling, Memory Management, Page Replacement, Disk Scheduling, Learn, Practice, Resources, Account / progress, Other]
+    validations: { required: true }
+  - type: textarea
+    id: input
+    attributes:
+      label: Input you used
+      description: Processes, reference string, request queue, settings — enough for someone to reproduce it.
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and why
+      description: If it's a wrong answer, show the working or cite the textbook example.
+    validations: { required: true }
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened
+      description: Screenshots help.
+    validations: { required: true }
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Chrome 131 on Windows 11 / Safari on iPhone
