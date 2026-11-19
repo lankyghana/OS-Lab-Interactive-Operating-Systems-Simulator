@@ -16,6 +16,16 @@ Plus **Learn** (16 topics: what, why, how, pros/cons, live worked example, furth
 
 Product decisions taken from the brief's recommendations: **Hybrid** design (calm dashboard + dark lab bench inside simulators), **simulators + explanations + exercises + quizzes**, and **email/password + Google** sign-in. Guests can use everything; an account adds saved history, progress, favourites and cross-device exercises.
 
+## Screenshots
+
+| Process Management | CPU Scheduling |
+|---|---|
+| ![Process Management: command console and live five-state diagram](docs/screenshots/process-management.png) | ![CPU Scheduling: ready queue, CPU, Gantt chart and event log](docs/screenshots/cpu-scheduling.png) |
+
+| Page Replacement | Disk Scheduling |
+|---|---|
+| ![Page Replacement: FIFO frames, reference string and fault table](docs/screenshots/page-replacement.png) | ![Disk Scheduling: disk surface and seek path](docs/screenshots/disk-scheduling.png) |
+
 ## Repository layout
 
 ```
